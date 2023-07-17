@@ -1,7 +1,102 @@
-:root {}
+:root {
+  --scroll: 0;
+}
+
+h1 {
+  font-size: 3.5rem;
+}
+h2 {
+  font-size: 3rem;
+}
+p {
+  font-size: 1.2rem;
+}
 
 * {
   margin: 0;
   padding: 0;
   list-style: 0;
+  font-family: 'Ubuntu', 'Noto Sans TC', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.full-section {
+  min-height: 100svh;
+  box-sizing: border-box;
+  padding: 1rem;
+  position: relative;
+}
+.full-section h2, .full-section p {
+  text-align: center;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.top-section p {
+  text-align: left;
+  max-width: none;
+}
+.top-section .side {
+  background-color: rgb(154, 154, 154, var(--background-opacity));
+  display: none;
+}
+.top-section {
+  position: sticky;
+  padding: 0;
+  top: 0;
+  translate: 0 calc(-1% * (max(var(--scroll), 25) - 25) * 100 / 75);
+  --background-opacity: calc(100% - 1% * min(var(--scroll), 30) * 100 / 30);
+}
+.top-section .side, .top-section .main {
+  padding: 1rem;
+  box-sizing: border-box;
+}
+@media (width >= 768px) {
+  .top-section .side {
+    display: block;
+  }
+  .top-section {
+    display: flex;
+  }
+  .top-section .side, .top-section .main {
+    width: 50%;
+    min-height: 100svh;
+  }
+  .top-section .main {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+  }
+}
+
+
+
+.imgs > .first-img {
+  width: 100vw;
+}
+@media (width >= 768px) {
+  .imgs > .first-img {
+    --value: min(var(--scroll), 30 * 50 / 30);
+    width: calc(50vw + 1vw * var(--value));
+  }
+}
+.imgs > * {
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  object-fit: cover;
+  z-index: 10;
+  padding: 0 2vw;
+  box-sizing: border-box;
+  max-height: 250px;
+  translate: 0 100%;
+  transition: translate .25s ease-in-out;
+}
+.imgs > .show {
+  translate: 0 0;
+}
+
+[data-img-to-show] {
+  position: absolute;
+  top: 20%;
+  height: 200px;
 }
